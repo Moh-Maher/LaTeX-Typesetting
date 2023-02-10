@@ -1,0 +1,293 @@
+\ProvidesPackage{beamerouterthemeprogressbar}[2007/06/21]
+
+
+% Beamer theme by Sylvain Bouveret <sylvain[dot]bouveret[aT]cert[DoT]fr>
+% jun. 2007 version 0.32
+%
+% based on the LaTeX-Beamer package :
+% Copyright 2003 by Till Tantau <tantau@users.sourceforge.net>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+%\RequirePackage{tikz}
+%
+%\makeatletter
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{shadows}
+\usetikzlibrary{arrows,shapes}
+
+\definecolor{pbblue}{HTML}{0A75A8}% filling color for the progress bar
+\definecolor{pbgray}{HTML}{575757}% background color for the progress bar
+
+\makeatletter
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Some color definitions...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>
+\definecolor{sectionColor}{RGB}{0,0,102}
+\definecolor{subsectionColor}{RGB}{0,0,153}
+\definecolor{sectionTextColor}{RGB}{255,255,255}
+\definecolor{subsectionTextColor}{RGB}{255,255,255}
+\definecolor{leftFootlineColor}{RGB}{0,0,102}
+\definecolor{middleFootlineColor}{RGB}{0,0,102}
+\definecolor{rightFootlineColor}{RGB}{0,0,102}
+\definecolor{authorColor}{RGB}{255,255,255}
+\definecolor{footlineTitleColor}{RGB}{255,255,255}
+\definecolor{instituteColor}{RGB}{255,255,255}
+\definecolor{dateColor}{RGB}{255,255,255}
+\definecolor{pageColor}{RGB}{255,255,255}
+\definecolor{titleColor}{RGB}{0,0,204}
+\definecolor{titleTextColor}{RGB}{255,255,255}
+\definecolor{bodyColor}{RGB}{255,255,255}
+\definecolor{normalTextColor}{RGB}{0,0,51}
+\definecolor{exampleTextColor}{RGB}{0,0,51}
+\definecolor{alertTextColor}{RGB}{0,0,51}
+\definecolor{chipColor}{RGB}{0,0,102}
+\definecolor{chipTextColor}{RGB}{255,255,255}
+\definecolor{normalBlockColor}{RGB}{0,0,204}
+\definecolor{normalTitleBlockColor}{RGB}{0,0,102}
+\definecolor{normalBlockTextColor}{RGB}{255,255,255}
+\definecolor{normalBlockTitleTextColor}{RGB}{255,255,255}
+\definecolor{exampleBlockColor}{RGB}{0,0,204}
+\definecolor{exampleTitleBlockColor}{RGB}{0,0,102}
+\definecolor{exampleBlockTextColor}{RGB}{255,255,255}
+\definecolor{exampleBlockTitleTextColor}{RGB}{255,255,255}
+\definecolor{alertBlockColor}{RGB}{0,0,204}
+\definecolor{alertTitleBlockColor}{RGB}{0,0,102}
+\definecolor{alertBlockTextColor}{RGB}{255,255,255}
+\definecolor{alertBlockTitleTextColor}{RGB}{255,255,255}
+\setbeamercolor{section in head/foot}{bg=sectionColor, fg=sectionTextColor}
+\setbeamercolor{subsection in head/foot}{bg=subsectionColor, fg=subsectionTextColor}
+\setbeamercolor*{block title}{fg=normalBlockTitleTextColor,bg=normalTitleBlockColor}
+\setbeamercolor*{block body}{fg=normalBlockTextColor,bg=normalBlockColor}
+\setbeamercolor*{block title alerted}{fg=alertBlockTitleTextColor,bg=alertTitleBlockColor}
+\setbeamercolor*{block body alerted}{fg=alertBlockTextColor,bg=alertBlockColor}
+\setbeamercolor*{block title example}{fg=exampleBlockTitleTextColor,bg=exampleTitleBlockColor}
+\setbeamercolor*{block body example}{fg=exampleBlockTextColor,bg=exampleBlockColor}
+\setbeamerfont{block title}{size={}}
+\setbeamercolor{titlelike}{fg=titleTextColor,bg=titleColor}
+\setbeamercolor*{normal text}{fg=normalTextColor,bg=bodyColor}
+\setbeamercolor*{example text}{fg=exampleTextColor}
+\setbeamercolor*{alerted text}{fg=alertTextColor}
+\useinnertheme[shadow=true]{rounded}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \setbeamercolor{item projected}{bg=chipColor,fg=chipTextColor}
+
+%\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+%	color(0pt)=(frametitle.bg);
+%	color(\paperwidth)=(frametitle right.bg)}
+\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+	color(0pt)=(frametitle.bg);
+	color(\paperwidth)=(frametitle right.bg)}
+\AtBeginDocument{
+	\pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{%
+		color(0pt)=(bg);
+		color(4pt)=(black!50!bg)}
+}
+%\setbeamercolor{item projected}{bg=chipColor,fg=chipTextColor}
+%\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+%	color(0pt)=(frametitle.bg);
+%	color(\paperwidth)=(frametitle right.bg)}
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Reset the Itemize icon dimension and shape
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{itemize item}{%
+	\begin{tikzpicture}
+	\shade[ball color=pbblue!95!white, preaction={fill=black,
+		opacity=.25,transform canvas={xshift=1mm,yshift=-1mm, yscale=0.5}}] (0,0) circle (1.2ex);
+	\end{tikzpicture}
+}
+
+\setbeamertemplate{itemize subitem}{%
+	\begin{tikzpicture}
+	\shade[ball color=pbgray!95!white, preaction={fill=black,
+		opacity=.25,transform canvas={xshift=1mm,yshift=-1mm, yscale=0.5}}] (0,0) circle (1.0ex);
+	\end{tikzpicture}
+}
+%=========================================================
+
+
+%=================
+\defbeamertemplate*{frametitle}{shadow theme}
+{%
+	\nointerlineskip%
+	\vskip0pt%
+	\hbox{\leavevmode
+		\advance\beamer@leftmargin by -12bp%
+		\advance\beamer@rightmargin by -12bp%
+		\beamer@tempdim=\textwidth%
+		\advance\beamer@tempdim by \beamer@leftmargin%
+		\advance\beamer@tempdim by \beamer@rightmargin%
+		\hskip-\Gm@lmargin\hbox{%
+			\setbox\beamer@tempbox=\hbox{\begin{minipage}[b]{\paperwidth}%
+					\vbox{}\vskip-.75ex%
+					\leftskip0.3cm%
+					\rightskip0.3cm plus1fil\leavevmode
+					\insertframetitle%
+					\ifx\insertframesubtitle\@empty%
+					\strut\par%
+					\else
+					\par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+					\fi%
+					\nointerlineskip
+					\vbox{}%
+			\end{minipage}}%
+			\beamer@tempdim=\ht\beamer@tempbox%
+			\advance\beamer@tempdim by 2pt%
+			\begin{pgfpicture}{0pt}{0pt}{\paperwidth}{\beamer@tempdim}
+				\usebeamercolor{frametitle right}
+				\pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+				\pgfusepath{clip}
+				\pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
+			\end{pgfpicture}
+			\hskip-\paperwidth%
+			\box\beamer@tempbox%
+		}%
+		\hskip-\Gm@rmargin%
+	}%
+	\nointerlineskip
+	\vskip-0.2pt
+	\hbox to\textwidth{\hskip-\Gm@lmargin\pgfuseshading{beamer@topshade}\hskip-\Gm@rmargin}
+	\vskip0pt
+}
+%==============
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Some computations dedicated to the progressbar...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\progressbar@progressbar{} % the progress bar
+\newcount\progressbar@tmpcounta% auxiliary counter
+\newcount\progressbar@tmpcountb% auxiliary counter
+\newdimen\progressbar@pbht %progressbar height
+\newdimen\progressbar@pbwd %progressbar width
+\newdimen\progressbar@tmpdim % auxiliary dimension
+
+\progressbar@pbwd=\paperwidth
+\progressbar@pbht=1.2ex
+
+% the progress bar
+\def\progressbar@progressbar{%
+	
+	\progressbar@tmpcounta=\insertframenumber
+	\progressbar@tmpcountb=\inserttotalframenumber
+	\progressbar@tmpdim=\progressbar@pbwd
+	\multiply\progressbar@tmpdim by \progressbar@tmpcounta
+	\divide\progressbar@tmpdim by \progressbar@tmpcountb
+	
+%	\begin{tikzpicture}[rounded corners=2pt,very thin]
+%	
+%	\shade[top color=gray!50,bottom color=gray!50,middle color=gray]
+%	(0pt, 0pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+%	
+%	\shade[draw=pbblue,top color=blue!50,bottom color=blue!50,middle color=blue] %
+%	(0pt, 0pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+%	
+%	\draw[color=normal text.fg]  
+%	(0pt, 0pt) rectangle (\progressbar@pbwd, \progressbar@pbht) 
+%	node[pos=0.5,color=white] {\textnormal{%
+%			\pgfmathparse{\insertframenumber*100/\inserttotalframenumber}%
+%			             \pgfmathprintnumber[fixed,precision=0]{\pgfmathresult}\,\%%
+%		}%
+%	};
+%	\end{tikzpicture}%
+} 
+%==============================================
+\newcommand{\progresscircle}{%
+	\pgfmathsetmacro{\theta}{360/\inserttotalframenumber*\insertframenumber}
+	\begin{tikzpicture}[scale=0.019]
+	\fill[gray] (0,0) circle (9);
+	\fill[blue] (0,0) -- (9,0) arc (0:-\theta:9);
+	\fill[white] (0,0) circle (5);
+	\node at (0,0) {\insertframenumber};
+	\end{tikzpicture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% headline and footbox 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtobeamertemplate{headline}{}
+{%
+ 
+	%\begin{beamercolorbox}[wd=\paperwidth,ht=3.125ex,dp=3.150ex]{section in head/foot}
+%	\progressbar@progressbar%
+%\hfill	\progresscircle%
+	%\end{beamercolorbox}%
+	
+	%	\begin{beamercolorbox}[ht=2.125ex,dp=1.125ex,%
+	%		leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+	%		\usebeamerfont{subsection in head/foot}\insertsubsectionhead
+	%	\end{beamercolorbox}%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtobeamertemplate{footline}{}
+{%
+		\leavevmode%
+	\hbox{%
+		\begin{beamercolorbox}[wd=.111111\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+			\usebeamerfont{author in head/foot}\insertshortauthor~~
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.663333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+			\usebeamerfont{title in head/foot}\insertshorttitle
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.233333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+			\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+			\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+		\end{beamercolorbox}
+	}%
+	\vskip0pt%
+	%\begin{beamercolorbox}[wd=\paperwidth,ht=3.125ex,dp=3.150ex]{section in head/foot}
+	%	\progressbar@progressbar%
+	%\end{beamercolorbox}%
+
+%	\begin{beamercolorbox}[ht=2.125ex,dp=1.125ex,%
+%		leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+%		\usebeamerfont{subsection in head/foot}\insertsubsectionhead
+%	\end{beamercolorbox}%
+}
+
+%###Itlaian flag colors#################################
+%\setbeamercolor{author in head/foot}{bg=green, fg=authorColor}
+%\setbeamercolor{title in head/foot}{bg=white, fg=footlineTitleColor}
+%\setbeamercolor{institute in head/foot}{fg=instituteColor}
+%\setbeamercolor{date in head/foot}{bg=red, fg=dateColor}
+%\defbeamertemplate*{footline}{infolines theme}
+%###############################################
+\setbeamercolor{author in head/foot}{bg=leftFootlineColor, fg=authorColor}
+\setbeamercolor{title in head/foot}{bg=middleFootlineColor, fg=footlineTitleColor}
+\setbeamercolor{institute in head/foot}{fg=instituteColor}
+\setbeamercolor{date in head/foot}{bg=rightFootlineColor, fg=dateColor}
+%\defbeamertemplate*{footline}{infolines theme}
+%{
+%	\leavevmode%
+%	\hbox{%
+%		\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+%			\usebeamerfont{author in head/foot}\insertshortauthor~~
+%		\end{beamercolorbox}%
+%		\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+%			\usebeamerfont{title in head/foot}\insertshorttitle
+%		\end{beamercolorbox}%
+%		\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+%			\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+%			\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+%		\end{beamercolorbox}
+%	}%
+%	\vskip0pt%
+%}
+
+
+
+\mode
+<all>
+
+\makeatother
