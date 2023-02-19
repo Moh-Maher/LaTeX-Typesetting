@@ -1,37 +1,38 @@
-\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/myTheme.sty,v 1.0 30/03/2016 16:31:50 G.FALLOURD-M.LEBRETON Exp $
-
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/myTheme.sty,v 1.0 30/03/2016 0:29:00 G.FALLOURD-M.LEBRETON Exp $
 \mode<presentation>
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\definecolor{sectionColor}{RGB}{0,51,51}
-\definecolor{subsectionColor}{RGB}{0,102,102}
+\mode<presentation>
+\definecolor{sectionColor}{RGB}{105,105,105}
+\definecolor{subsectionColor}{RGB}{128,128,128}
 \definecolor{sectionTextColor}{RGB}{255,255,255}
-\definecolor{subsectionTextColor}{RGB}{255,255,255}
+\definecolor{subsectionTextColor}{RGB}{0,0,0}
 \definecolor{leftFootlineColor}{RGB}{0,0,0}
 \definecolor{middleFootlineColor}{RGB}{0,0,0}
 \definecolor{rightFootlineColor}{RGB}{0,0,0}
 \definecolor{authorColor}{RGB}{255,255,255}
 \definecolor{footlineTitleColor}{RGB}{255,255,255}
-\definecolor{instituteColor}{RGB}{255,255,255}
+\definecolor{instituteColor}{RGB}{0,0,0}
 \definecolor{dateColor}{RGB}{255,255,255}
-\definecolor{pageColor}{RGB}{255,255,255}
-\definecolor{titleColor}{RGB}{0,51,51}
-\definecolor{titleTextColor}{RGB}{255,255,255}
+\definecolor{pageColor}{RGB}{0,0,0}
+\definecolor{titleColor}{RGB}{169,169,169}
+\definecolor{titleTextColor}{RGB}{0,0,0}
+
 \definecolor{bodyColor}{RGB}{255,255,255}
-\definecolor{normalTextColor}{RGB}{0,0,51}
-\definecolor{exampleTextColor}{RGB}{0,0,51}
-\definecolor{alertTextColor}{RGB}{0,0,51}
-\definecolor{chipColor}{RGB}{0,51,51}
+\definecolor{normalTextColor}{RGB}{0,0,0}
+\definecolor{exampleTextColor}{RGB}{0,0,0}
+\definecolor{alertTextColor}{RGB}{255,0,0}
+\definecolor{chipColor}{RGB}{0,0,0}
 \definecolor{chipTextColor}{RGB}{255,255,255}
-\definecolor{normalBlockColor}{RGB}{0,51,51}
-\definecolor{normalTitleBlockColor}{RGB}{0,51,51}
+
+\definecolor{normalBlockColor}{RGB}{105,105,105}
+\definecolor{normalTitleBlockColor}{RGB}{0,0,0}
 \definecolor{normalBlockTextColor}{RGB}{255,255,255}
-\definecolor{normalBlockTitleTextColor}{RGB}{255,255,255}
-\definecolor{exampleBlockColor}{RGB}{0,51,51}
-\definecolor{exampleTitleBlockColor}{RGB}{0,51,51}
+\definecolor{normalBlockTitleTextColor}{RGB}{0,0,0}
+\definecolor{exampleBlockColor}{RGB}{128,128,128}
+\definecolor{exampleTitleBlockColor}{RGB}{204,0,0}
 \definecolor{exampleBlockTextColor}{RGB}{255,255,255}
 \definecolor{exampleBlockTitleTextColor}{RGB}{255,255,255}
-\definecolor{alertBlockColor}{RGB}{0,51,51}
-\definecolor{alertTitleBlockColor}{RGB}{0,51,51}
+\definecolor{alertBlockColor}{RGB}{255,0,0}
+\definecolor{alertTitleBlockColor}{RGB}{204,0,0}
 \definecolor{alertBlockTextColor}{RGB}{255,255,255}
 \definecolor{alertBlockTitleTextColor}{RGB}{255,255,255}
 \setbeamercolor{section in head/foot}{bg=sectionColor, fg=sectionTextColor}
@@ -57,24 +58,6 @@ color(\paperwidth)=(frametitle right.bg)}
 color(0pt)=(bg);
 color(4pt)=(black!50!bg)}
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Reset the Itemize icon dimension and shape
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setbeamertemplate{itemize item}{%
-	\begin{tikzpicture}
-	\shade[ball color=pbblue!95!white, preaction={fill=black,
-		opacity=.25,transform canvas={xshift=1mm,yshift=-1mm, yscale=0.5}}] (0,0) circle (1.2ex);
-	\end{tikzpicture}
-}
-
-\setbeamertemplate{itemize subitem}{%
-	\begin{tikzpicture}
-	\shade[ball color=pbgray!95!white, preaction={fill=black,
-		opacity=.25,transform canvas={xshift=1mm,yshift=-1mm, yscale=0.5}}] (0,0) circle (1.0ex);
-	\end{tikzpicture}
-}
-%=========================================================
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \defbeamertemplate*{frametitle}{shadow theme}
 {%
 \nointerlineskip%
@@ -127,27 +110,6 @@ color(4pt)=(black!50!bg)}
 leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
 \usebeamerfont{subsection in head/foot}\insertsubsectionhead
 \end{beamercolorbox}%
-}
-\setbeamercolor{author in head/foot}{bg=leftFootlineColor, fg=authorColor}
-\setbeamercolor{title in head/foot}{bg=middleFootlineColor, fg=footlineTitleColor}
-\setbeamercolor{institute in head/foot}{fg=instituteColor}
-\setbeamercolor{date in head/foot}{bg=rightFootlineColor, fg=dateColor}
-\defbeamertemplate*{footline}{infolines theme}
-{
-\leavevmode%
-\hbox{%
-\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-\usebeamerfont{author in head/foot}\insertshortauthor~~
-\end{beamercolorbox}%
-\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-\usebeamerfont{title in head/foot}\insertshorttitle
-\end{beamercolorbox}%
-\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
-\end{beamercolorbox}
-}%
-\vskip0pt%
 }
 \mode
 <all>
